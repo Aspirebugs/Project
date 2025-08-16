@@ -17,6 +17,11 @@ function Home() {
                 setproblems(response.data);
             }catch(err){
                 console.error(err);
+                 if(err.status === 401){
+                  navigate('/auth',{state : {from : location},replace : true});
+                }else{
+                  console.log("Error in getting problems");
+                }
                 navigate('/auth',{state : {from : location},replace : true});
             }
         }

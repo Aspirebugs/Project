@@ -4,6 +4,8 @@ import Layout from "./Layout.jsx"
 import Home from "./Home.jsx"
 import Missing from "./Missing.jsx"
 import Problem from "./Problem.jsx"
+import RequireAuth from "./RequireAuth.jsx";
+
 function App() {
 
   return (
@@ -17,7 +19,9 @@ function App() {
           {/* we want to protect these routes */}
             <Route  path = "/" element={<Home/>} />
 
+           
             <Route path = "/problems/:problemId" element = {<Problem/>}/> 
+         
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />

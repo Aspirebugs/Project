@@ -1,5 +1,5 @@
 import axios from 'axios';
-const backend_url = 'http://localhost:8080';
+const backend_url = import.meta.env.VITE_API_URL;
 export default axios.create({
     baseURL : backend_url
 });

@@ -1,1 +1,4 @@
 /backend/.env
+/compiler/.env
+/Frontend/oj-project/.env
+/compiler/keys

@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import {auth} from '../middleware/auth.js';
 import Problem from '../models/Problems.js';
+import TestCase from '../models/TestCase.js';
+import axios from 'axios'
 
 dotenv.config();
 
@@ -140,6 +142,27 @@ router.get('/',auth,async (req,res) =>{
     }catch(err){
         console.error(err);
         res.status(500).json({error : 'Unable to fetch problems'});
+    }
+});
+
+router.post('/run',auth,async (req,res) =>{
+    try{
+        const {problemId,code,language = 'cpp'} = req.body; 
+        const testCases = await TestCase.find({problemId});
+         if (!testCases.length) {
+            return res.status(400).json({ error: 'No test cases found.' });
+        }
+        const compiler_url = process.env.COMPILER_URL;
+        const payload  = {
+            code,
+            language,
+            tests : testCases.map((tc) => ({input : tc.input,output : tc.output}))
+        }
+        const output = await axios.post(`${compiler_url}/run`,payload,{timeout : 30000});
+        res.json(output.data);
+    }catch(err){
+        console.error(err);
+        res.status(500).json({error : 'Submission failed'});
     }
 });
 
