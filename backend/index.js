@@ -8,9 +8,19 @@ import cors from 'cors'
 dotenv.config();
 const app = express();
 
+const allowed = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  /\.vercel\.app$/
+];
+
 app.use(cors({
-    origin: true,
-    credentials: true
+  origin(origin, cb) {
+    if (!origin) return cb(null, true);
+    if (allowed.some((a) => a instanceof RegExp ? a.test(origin) : a === origin)) return cb(null, true);
+    cb(new Error("Not allowed by CORS"));
+  },
+  credentials: true
 }));
 
 app.use(express.json());
