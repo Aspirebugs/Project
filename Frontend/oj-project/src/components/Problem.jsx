@@ -271,8 +271,6 @@ export default function Problem() {
                     if (language === "c") return highlight(codeText, languages.c);
                     if (language === "javascript") return highlight(codeText, languages.javascript);
                     if (language === "python") return highlight(codeText, languages.python);
-                    const highlighted =  highlight(codeText, languages.cpp);
-                    return withLineNumbers(highlighted);
                   }}
                   padding={16}
                   style={{
