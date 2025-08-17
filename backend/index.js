@@ -8,7 +8,7 @@ import cors from 'cors'
 dotenv.config();
 const app = express();
 
-const allowed = [
+const allowed = [ 
   "https://project-mu-three-59.vercel.app" ,
   "https://project-krishs-projects-a41f1900.vercel.app",
   "https://project-git-master-krishs-projects-a41f1900.vercel.app"
