@@ -97,7 +97,7 @@ router.post('/login',registerLogin,async (req,res) => {
 
     res.cookie("jid", refresh, {
     httpOnly: true,
-    secure:   process.env.NODE_ENV === "production",
+    secure:   true,
     sameSite: "none",
     path:     "/refresh",
     maxAge:   7 * 24*60*60*1000, // 7d in ms
